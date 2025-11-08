@@ -11,7 +11,7 @@ const Footer = () => {
               <div className="p-2 rounded-lg bg-primary/10">
                 <Shield className="h-5 w-5 text-primary" />
               </div>
-              <span className="text-lg font-bold text-gradient">dokchain</span>
+              <span className="text-lg font-bold text-gradient">Dokchain</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Decentralized credential storage powered by Solana blockchain.
@@ -22,17 +22,26 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link to="/dashboard" className="hover:text-primary transition-colors">
+                <Link
+                  to="/dashboard"
+                  className="hover:text-primary transition-colors"
+                >
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/verify" className="hover:text-primary transition-colors">
+                <Link
+                  to="/verify"
+                  className="hover:text-primary transition-colors"
+                >
                   Verify Documents
                 </Link>
               </li>
               <li>
-                <Link to="/issuer" className="hover:text-primary transition-colors">
+                <Link
+                  to="/issuer"
+                  className="hover:text-primary transition-colors"
+                >
                   For Institutions
                 </Link>
               </li>
@@ -86,7 +95,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 dokchain. Built on Solana.</p>
+          <p>&copy; 2025 Dokchain. Built on Solana.</p>
         </div>
       </div>
     </footer>

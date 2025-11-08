@@ -14,11 +14,11 @@ import {
 import { Upload, Send, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WalletModal from "@/components/WalletModal";
+// WalletModal removed; using wallet-adapter UI
 
 const Issuer = () => {
   const [issueModalOpen, setIssueModalOpen] = useState(false);
-  const [walletModalOpen, setWalletModalOpen] = useState(false);
+  // removed custom wallet modal state; use wallet-adapter UI
 
   const issuedDocuments = [
     {
@@ -43,7 +43,7 @@ const Issuer = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onConnectWallet={() => setWalletModalOpen(true)} isWalletConnected />
+      <Navbar />
 
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -68,14 +68,19 @@ const Issuer = () => {
           <h2 className="text-2xl font-semibold">Issued Documents</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {issuedDocuments.map((doc, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all border-border">
+              <Card
+                key={index}
+                className="p-6 hover:shadow-lg transition-all border-border"
+              >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="p-3 rounded-lg bg-success/10">
                       <CheckCircle className="h-6 w-6 text-success" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">{doc.name}</h3>
+                      <h3 className="font-semibold text-foreground">
+                        {doc.name}
+                      </h3>
                       <p className="text-sm text-muted-foreground">
                         Recipient: {doc.recipient}
                       </p>
@@ -90,7 +95,9 @@ const Issuer = () => {
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Hash:</span>
-                    <span className="text-foreground font-mono">{doc.hash}</span>
+                    <span className="text-foreground font-mono">
+                      {doc.hash}
+                    </span>
                   </div>
                 </div>
 
@@ -151,7 +158,7 @@ const Issuer = () => {
       </Dialog>
 
       <Footer />
-      <WalletModal open={walletModalOpen} onOpenChange={setWalletModalOpen} />
+      {/* custom wallet modal removed in favor of wallet-adapter UI */}
     </div>
   );
 };

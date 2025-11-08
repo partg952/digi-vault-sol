@@ -6,11 +6,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DocumentCard from "@/components/DocumentCard";
 import UploadModal from "@/components/UploadModal";
-import WalletModal from "@/components/WalletModal";
+// WalletModal removed; using wallet-adapter UI
 
 const Dashboard = () => {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
-  const [walletModalOpen, setWalletModalOpen] = useState(false);
+  // removed custom wallet modal state; use wallet-adapter UI
 
   const mockDocuments = [
     {
@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onConnectWallet={() => setWalletModalOpen(true)} isWalletConnected />
+      <Navbar />
 
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -59,12 +59,6 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="my-documents" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-3">
-            <TabsTrigger value="my-documents">My Documents</TabsTrigger>
-            <TabsTrigger value="shared">Shared with Me</TabsTrigger>
-            <TabsTrigger value="issued">Issued to Me</TabsTrigger>
-          </TabsList>
-
           <TabsContent value="my-documents" className="space-y-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {mockDocuments.map((doc, index) => (
@@ -101,7 +95,7 @@ const Dashboard = () => {
 
       <Footer />
       <UploadModal open={uploadModalOpen} onOpenChange={setUploadModalOpen} />
-      <WalletModal open={walletModalOpen} onOpenChange={setWalletModalOpen} />
+      {/* custom wallet modal removed in favor of wallet-adapter UI */}
     </div>
   );
 };

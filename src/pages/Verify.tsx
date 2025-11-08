@@ -6,13 +6,13 @@ import { Label } from "@/components/ui/label";
 import { CheckCircle, XCircle, Search, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WalletModal from "@/components/WalletModal";
+// WalletModal removed; using wallet-adapter UI
 
 const Verify = () => {
-  const [walletModalOpen, setWalletModalOpen] = useState(false);
-  const [verificationResult, setVerificationResult] = useState<"verified" | "invalid" | null>(
-    null
-  );
+  // removed custom wallet modal state; use wallet-adapter UI
+  const [verificationResult, setVerificationResult] = useState<
+    "verified" | "invalid" | null
+  >(null);
   const [documentHash, setDocumentHash] = useState("");
 
   const handleVerify = () => {
@@ -24,7 +24,7 @@ const Verify = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onConnectWallet={() => setWalletModalOpen(true)} />
+      <Navbar />
 
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
@@ -75,9 +75,12 @@ const Verify = () => {
                         <CheckCircle className="h-12 w-12 text-success" />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-bold text-success">Document Verified</h2>
+                        <h2 className="text-2xl font-bold text-success">
+                          Document Verified
+                        </h2>
                         <p className="text-muted-foreground">
-                          This credential is authentic and has not been tampered with
+                          This credential is authentic and has not been tampered
+                          with
                         </p>
                       </div>
                     </>
@@ -91,7 +94,8 @@ const Verify = () => {
                           Verification Failed
                         </h2>
                         <p className="text-muted-foreground">
-                          This document could not be verified or has been tampered with
+                          This document could not be verified or has been
+                          tampered with
                         </p>
                       </div>
                     </>
@@ -102,19 +106,27 @@ const Verify = () => {
                   <div className="space-y-4 pt-6 border-t border-border">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Issuer</p>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Issuer
+                        </p>
                         <p className="font-semibold">MIT University</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Owner Wallet</p>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Owner Wallet
+                        </p>
                         <p className="font-mono text-sm">5FHne...8xqD</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Issue Date</p>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Issue Date
+                        </p>
                         <p className="font-semibold">2024-01-15</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Status</p>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Status
+                        </p>
                         <p className="font-semibold text-success">Active</p>
                       </div>
                     </div>
@@ -135,11 +147,14 @@ const Verify = () => {
                 <div className="inline-block p-4 rounded-full bg-primary/10">
                   <Search className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold">How Verification Works</h3>
+                <h3 className="text-xl font-semibold">
+                  How Verification Works
+                </h3>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  Every document issued through dokchain has a unique cryptographic hash
-                  stored on the Solana blockchain. This hash acts as a digital fingerprint that
-                  proves authenticity and prevents tampering.
+                  Every document issued through Dokchain has a unique
+                  cryptographic hash stored on the Solana blockchain. This hash
+                  acts as a digital fingerprint that proves authenticity and
+                  prevents tampering.
                 </p>
               </div>
             </Card>
@@ -148,7 +163,7 @@ const Verify = () => {
       </main>
 
       <Footer />
-      <WalletModal open={walletModalOpen} onOpenChange={setWalletModalOpen} />
+      {/* custom wallet modal removed in favor of wallet-adapter UI */}
     </div>
   );
 };
