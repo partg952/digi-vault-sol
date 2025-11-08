@@ -137,7 +137,7 @@ const Verify = () => {
                 </div>
                 <h3 className="text-xl font-semibold">How Verification Works</h3>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  Every document issued through dokchain has a unique cryptographic hash
+                  Every document issued through Dokchain has a unique cryptographic hash
                   stored on the Solana blockchain. This hash acts as a digital fingerprint that
                   proves authenticity and prevents tampering.
                 </p>
