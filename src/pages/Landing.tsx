@@ -19,9 +19,11 @@ import {
   WalletConnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
+import RoleSelectModal from "@/components/RoleSelectModal";
 
 const Landing = () => {
   // wallet modal removed; using wallet-adapter UI buttons
+  const [roleModalOpen, setRoleModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const features = [
@@ -101,7 +103,7 @@ const Landing = () => {
                   size="lg"
                   variant="outline"
                   className="text-lg px-8"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => setRoleModalOpen(true)}
                 >
                   Launch App
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -189,7 +191,7 @@ const Landing = () => {
       </section>
 
       <Footer />
-      {/* custom wallet modal removed in favor of wallet-adapter UI */}
+      <RoleSelectModal open={roleModalOpen} onOpenChange={setRoleModalOpen} />
     </div>
   );
 };

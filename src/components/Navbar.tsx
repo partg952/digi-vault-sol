@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { Shield, Wallet } from "lucide-react";
+import { Shield } from "lucide-react";
+import { useRole } from "@/context/role";
 
 const Navbar = () => {
+  const { role } = useRole();
   return (
     <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -22,18 +23,22 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link
-              to="/dashboard"
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/issuer"
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              Issuer
-            </Link>
+            {role === "user" && (
+              <Link
+                to="/dashboard"
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Dashboard
+              </Link>
+            )}
+            {role === "institution" && (
+              <Link
+                to="/issuer"
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Issuer
+              </Link>
+            )}
             <Link
               to="/verify"
               className="text-foreground hover:text-primary transition-colors"
@@ -42,7 +47,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <WalletMultiButton className="gradient-primary" />
+          <WalletMultiButton />
         </div>
       </div>
     </nav>
