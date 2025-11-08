@@ -16,7 +16,7 @@ const Navbar = ({ onConnectWallet, isWalletConnected = false }: NavbarProps) => 
             <div className="p-2 rounded-lg bg-primary/10">
               <Shield className="h-6 w-6 text-primary" />
             </div>
-            <span className="text-xl font-bold text-gradient">DigiLocker 3.0</span>
+            <span className="text-xl font-bold text-gradient">dokchain</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">

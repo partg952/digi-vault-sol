@@ -34,7 +34,7 @@ const WalletModal = ({ open, onOpenChange }: WalletModalProps) => {
         <DialogHeader>
           <DialogTitle>Connect Wallet</DialogTitle>
           <DialogDescription>
-            Choose a wallet to connect to DigiLocker 3.0
+            Choose a wallet to connect to dokchain
           </DialogDescription>
         </DialogHeader>
 
