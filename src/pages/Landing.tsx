@@ -1,32 +1,49 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Shield, Lock, Share2, Upload, CheckCircle, ArrowRight } from "lucide-react";
+import {
+  Shield,
+  Lock,
+  Share2,
+  Upload,
+  CheckCircle,
+  ArrowRight,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
-import WalletModal from "@/components/WalletModal";
+// WalletModal removed; using wallet-adapter UI
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-documents.jpg";
+import DecryptedText from "@/components/DecryptedText";
+import {
+  WalletConnectButton,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import RoleSelectModal from "@/components/RoleSelectModal";
 
 const Landing = () => {
-  const [walletModalOpen, setWalletModalOpen] = useState(false);
+  // wallet modal removed; using wallet-adapter UI buttons
+  const [roleModalOpen, setRoleModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const features = [
     {
       icon: Lock,
       title: "Secure Storage",
-      description: "Files encrypted & stored on IPFS/Arweave for permanent, tamper-proof security.",
+      description:
+        "Files encrypted & stored on IPFS/Arweave for permanent, tamper-proof security.",
     },
     {
       icon: CheckCircle,
       title: "Verifiable Credentials",
-      description: "Authenticity checked on Solana blockchain — trust built into every document.",
+      description:
+        "Authenticity checked on Solana blockchain — trust built into every document.",
     },
     {
       icon: Share2,
       title: "Instant Sharing",
-      description: "Share verified documents securely with anyone, anywhere, instantly.",
+      description:
+        "Share verified documents securely with anyone, anywhere, instantly.",
     },
   ];
 
@@ -34,69 +51,64 @@ const Landing = () => {
     {
       number: "01",
       title: "Connect Wallet",
-      description: "Link your Solana wallet to verify identity and get started.",
+      description:
+        "Link your Solana wallet to verify identity and get started.",
     },
     {
       number: "02",
       title: "Upload Document",
-      description: "Your file is encrypted and stored securely on decentralized storage.",
+      description:
+        "Your file is encrypted and stored securely on decentralized storage.",
     },
     {
       number: "03",
       title: "Verify On-Chain",
-      description: "Document hash recorded on Solana for permanent verification.",
+      description:
+        "Document hash recorded on Solana for permanent verification.",
     },
   ];
 
   return (
     <div className="min-h-screen">
-      <Navbar onConnectWallet={() => setWalletModalOpen(true)} />
+      <Navbar />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden h-screen flex justify-start">
         <div className="absolute inset-0 gradient-soft opacity-50" />
         <div className="absolute inset-0 glow-soft" />
-        
-        <div className="container mx-auto px-4 py-20 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-in-up">
+
+        <div className="container mx-auto px-4 h-full relative z-10">
+          <div className="w-full md:w-1/2 mx-auto h-full flex justify-center items-center">
+            <div className="space-y-8 animate-fade-in-up flex items-center flex-col text-center">
               <div className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
                 Powered by Solana
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+              {/* <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Own and Verify Your Digital Documents — <span className="text-gradient">Forever</span>
-              </h1>
+              </h1> */}
+              <DecryptedText
+                text="Own and Verify Your Digital Documents — Forever"
+                speed={50}
+                animateOn="view"
+                parentClassName="w-full text-center"
+                className="text-5xl md:text-6xl font-bold leading-tight"
+                encryptedClassName="text-5xl md:text-6xl font-bold leading-tight opacity-80"
+              />
               <p className="text-xl text-muted-foreground">
-                A decentralized document locker built on Solana — tamper-proof, transparent, and user-controlled.
+                A decentralized document locker built on Solana — tamper-proof,
+                transparent, and user-controlled.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
-                  className="gradient-primary text-lg px-8 glow-primary"
-                  onClick={() => setWalletModalOpen(true)}
-                >
-                  <Shield className="mr-2 h-5 w-5" />
-                  Connect Wallet
-                </Button>
-                <Button
-                  size="lg"
                   variant="outline"
                   className="text-lg px-8"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => setRoleModalOpen(true)}
                 >
                   Launch App
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
-            </div>
-
-            <div className="relative animate-float">
-              <div className="absolute inset-0 glow-primary rounded-2xl" />
-              <img
-                src={heroImage}
-                alt="Document Verification"
-                className="rounded-2xl shadow-2xl relative z-10"
-              />
             </div>
           </div>
         </div>
@@ -171,7 +183,6 @@ const Landing = () => {
           <Button
             size="lg"
             className="gradient-primary text-lg px-8 glow-primary"
-            onClick={() => setWalletModalOpen(true)}
           >
             Get Started
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -180,7 +191,7 @@ const Landing = () => {
       </section>
 
       <Footer />
-      <WalletModal open={walletModalOpen} onOpenChange={setWalletModalOpen} />
+      <RoleSelectModal open={roleModalOpen} onOpenChange={setRoleModalOpen} />
     </div>
   );
 };

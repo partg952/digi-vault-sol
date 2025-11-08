@@ -22,17 +22,26 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link to="/dashboard" className="hover:text-primary transition-colors">
+                <Link
+                  to="/dashboard"
+                  className="hover:text-primary transition-colors"
+                >
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/verify" className="hover:text-primary transition-colors">
+                <Link
+                  to="/verify"
+                  className="hover:text-primary transition-colors"
+                >
                   Verify Documents
                 </Link>
               </li>
               <li>
-                <Link to="/issuer" className="hover:text-primary transition-colors">
+                <Link
+                  to="/issuer"
+                  className="hover:text-primary transition-colors"
+                >
                   For Institutions
                 </Link>
               </li>

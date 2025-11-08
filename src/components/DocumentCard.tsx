@@ -55,13 +55,7 @@ const DocumentCard = ({ name, issuer, timestamp, status, category }: DocumentCar
           <Eye className="mr-2 h-4 w-4" />
           View
         </Button>
-        <Button variant="outline" size="sm" className="flex-1">
-          <Share2 className="mr-2 h-4 w-4" />
-          Share
-        </Button>
-        <Button size="sm" className="flex-1 bg-primary">
-          Verify
-        </Button>
+          
       </div>
     </Card>
   );

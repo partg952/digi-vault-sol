@@ -1,17 +1,12 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Wallet } from "lucide-react";
+// WalletModal was the project's custom wallet connect modal.
+// We've migrated to use the official solana wallet-adapter UI components
+// (WalletMultiButton / WalletConnectButton). Keep a no-op export so any
+// leftover imports won't break the build during migration.
 
-interface WalletModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+export default function WalletModal() {
+  return null;
 }
+<<<<<<< HEAD
 
 const wallets = [
   { name: "Phantom", logo: "P", color: "bg-purple-500" },
@@ -71,3 +66,5 @@ const WalletModal = ({ open, onOpenChange }: WalletModalProps) => {
 };
 
 export default WalletModal;
+=======
+>>>>>>> 91c0a2102490943785a60b843ea0564cd1820fa2
