@@ -40,7 +40,7 @@ const RoleSelectModal = ({ open, onOpenChange }: RoleSelectModalProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
           <Button
             variant="outline"
-            className="h-28 flex flex-col items-center justify-center gap-2 hover:border-primary/50 hover:bg-primary/5"
+            className="h-28 flex flex-col items-center justify-center gap-2 hover:border-primary/50 "
             onClick={() => handleSelect("user")}
           >
             <User className="h-6 w-6" />
@@ -51,7 +51,7 @@ const RoleSelectModal = ({ open, onOpenChange }: RoleSelectModalProps) => {
           </Button>
           <Button
             variant="outline"
-            className="h-28 flex flex-col items-center justify-center gap-2 hover:border-primary/50 hover:bg-primary/5"
+            className="h-28 flex flex-col items-center justify-center gap-2 hover:border-primary/50 "
             onClick={() => handleSelect("institution")}
           >
             <Building2 className="h-6 w-6" />

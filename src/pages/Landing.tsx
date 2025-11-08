@@ -20,7 +20,7 @@ import {
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import RoleSelectModal from "@/components/RoleSelectModal";
-
+import Prism from '@/components/Prism';
 const Landing = () => {
   // wallet modal removed; using wallet-adapter UI buttons
   const [roleModalOpen, setRoleModalOpen] = useState(false);
@@ -40,10 +40,10 @@ const Landing = () => {
         "Authenticity checked on Solana blockchain — trust built into every document.",
     },
     {
-      icon: Share2,
-      title: "Instant Sharing",
+      icon: Shield,
+      title: "Zero-Knowledge Proofs",
       description:
-        "Share verified documents securely with anyone, anywhere, instantly.",
+        "Prove possession or validity of a document without revealing its contents — privacy-preserving verification.",
     },
   ];
 
@@ -77,6 +77,22 @@ const Landing = () => {
         <div className="absolute inset-0 gradient-soft opacity-50" />
         <div className="absolute inset-0 glow-soft" />
 
+        {/* ColorBends as hero background */}
+
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Prism
+            animationType="3drotate"
+            timeScale={0.9}
+            height={3.5}
+            baseWidth={5.5}
+            scale={1.6}
+            hueShift={0.1}
+            colorFrequency={1}
+            noise={0.15}
+            glow={1}
+            suspendWhenOffscreen={true}
+          />
+        </div>
         <div className="container mx-auto px-4 h-full relative z-10">
           <div className="w-full md:w-1/2 mx-auto h-full flex justify-center items-center">
             <div className="space-y-8 animate-fade-in-up flex items-center flex-col text-center">
@@ -86,29 +102,21 @@ const Landing = () => {
               {/* <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Own and Verify Your Digital Documents — <span className="text-gradient">Forever</span>
               </h1> */}
+
               <DecryptedText
                 text="Own and Verify Your Digital Documents — Forever"
                 speed={50}
                 animateOn="view"
-                parentClassName="w-full text-center"
-                className="text-5xl md:text-6xl font-bold leading-tight"
-                encryptedClassName="text-5xl md:text-6xl font-bold leading-tight opacity-80"
+                parentClassName="w-screen text-center"
+                className="text-5xl md:text-8xl font-bold leading-tight -z-1"
+                encryptedClassName="text-5xl md:text-8xl font-bold leading-tight opacity-80"
               />
+
               <p className="text-xl text-muted-foreground">
                 A decentralized document locker built on Solana — tamper-proof,
                 transparent, and user-controlled.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-lg px-8"
-                  onClick={() => setRoleModalOpen(true)}
-                >
-                  Launch App
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
+
             </div>
           </div>
         </div>
@@ -151,21 +159,23 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {steps.map((step, index) => (
-              <div key={index} className="relative">
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center text-white text-2xl font-bold shadow-lg glow-primary">
-                    {step.number}
+          <div className="relative max-w-5xl mx-auto">
+            {/* horizontal connector for md+ screens (behind the icons) */}
+            <div className="hidden md:block absolute top-10 left-0 right-0 h-px bg-gradient-to-r from-primary to-accent z-0" />
+
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
+              {steps.map((step, index) => (
+                <div key={index} className="flex-1 text-center relative z-10">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center text-black text-2xl font-bold shadow-lg glow-primary z-10">
+                      {step.number}
+                    </div>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                    <p className="text-muted-foreground">{step.description}</p>
                   </div>
-                  <h3 className="text-xl font-semibold">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.description}</p>
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-10 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary to-accent" />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
