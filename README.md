@@ -1,16 +1,16 @@
-# 🔐 Decentralized DigiLocker — Built on Solana
+# 🔐 DOKCHAIN — Built on Solana
 
 > A tamper-proof, decentralized document storage & verification platform for individuals and institutions — powered by **Solana**, **Anchor**, and **Arweave/IPFS**.
 
 ![Solana](https://img.shields.io/badge/Solana-Rust%20|%20Anchor-blueviolet?logo=solana)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Build-Active-success)
+![Status](https://img.shields.io/badge/Build-Building-yellow)
 
 ---
 
 ## 🌍 Overview
 
-**Decentralized DigiLocker** lets users **store**, **verify**, and **share** important digital documents (certificates, degrees, IDs) in a **self-sovereign**, **cryptographically verifiable**, and **tamper-proof** way.  
+**DOKCHAIN** lets users **store**, **verify**, and **share** important digital documents (certificates, degrees, IDs) in a **self-sovereign**, **cryptographically verifiable**, and **tamper-proof** way.  
 Verified institutions issue credentials, users control them, and verifiers can trust them — all without centralized intermediaries.
 
 ---
