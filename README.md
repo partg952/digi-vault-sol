@@ -1,73 +1,193 @@
-# Welcome to your Lovable project
+# 🔐 Decentralized DigiLocker — Built on Solana
 
-## Project info
+> A tamper-proof, decentralized document storage & verification platform for individuals and institutions — powered by **Solana**, **Anchor**, and **Arweave/IPFS**.
 
-**URL**: https://lovable.dev/projects/fa7f6bd0-1cc0-4713-bb6c-5c59309f9019
+![Solana](https://img.shields.io/badge/Solana-Rust%20|%20Anchor-blueviolet?logo=solana)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Build-Active-success)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌍 Overview
 
-**Use Lovable**
+**Decentralized DigiLocker** lets users **store**, **verify**, and **share** important digital documents (certificates, degrees, IDs) in a **self-sovereign**, **cryptographically verifiable**, and **tamper-proof** way.  
+Verified institutions issue credentials, users control them, and verifiers can trust them — all without centralized intermediaries.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fa7f6bd0-1cc0-4713-bb6c-5c59309f9019) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## ✨ Features
 
-**Use your preferred IDE**
+### 🧍 For Users
+- 🔑 Connect via Solana wallet (Phantom, Solflare, Backpack)
+- 📄 Upload and encrypt documents before uploading
+- 🔗 Document hashes and metadata anchored on-chain
+- 🤝 Share access with others securely
+- ❌ Revoke or update documents anytime
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🏫 For Institutions
+- 🧾 Register as an issuer and get verified on-chain
+- 🪪 Issue verifiable credentials to wallet addresses
+- 🧩 Manage issued certificates and view issuance logs
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 🔍 For Verifiers
+- 🧮 Verify a document’s authenticity using its CID/hash
+- ✅ Validate issuer identity, hash, and timestamp on-chain
+- 📱 Verify through QR codes for printed credentials
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## ⚙️ Tech Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+| Layer | Technology |
+|-------|-------------|
+| Blockchain | Solana (Rust + Anchor) |
+| Frontend | React + TailwindCSS + shadcn/ui |
+| Wallet Integration | Solana Wallet Adapter |
+| Storage | Arweave / IPFS (via Bundlr) |
+| Encryption | AES-GCM + asymmetric key sharing |
+| Deployment | Vercel / Netlify (frontend) + Solana Devnet (program) |
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🧱 Folder Structure
+
+```bash
+.
+├── app-frontend/
+│   ├── components/
+│   ├── pages/
+│   │   ├── Landing.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Verify.tsx
+│   │   ├── Issue.tsx
+│   │   └── Profile.tsx
+│   ├── hooks/
+│   ├── public/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vite.config.ts
+│
+├── solana-program/
+│   ├── programs/
+│   │   └── digilocker/
+│   │       ├── src/
+│   │       │   └── lib.rs
+│   │       └── Cargo.toml
+│   ├── Anchor.toml
+│   └── migrations/
+│
+├── README.md
+└── .gitignore
+
+🧑‍💻 Getting Started
+1️⃣ Clone the Repository
+
+git clone https://github.com/<your-username>/decentralized-digilocker.git
+cd decentralized-digilocker
+
+2️⃣ Install Dependencies
+Frontend
+
+cd app-frontend
+npm install
+
+Solana Program
+
+cd solana-program
+anchor build
+
+3️⃣ Run the Frontend (Development)
+
+cd app-frontend
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+Then open 👉 http://localhost:5173
+4️⃣ Deploy the Solana Program (Optional)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+cd solana-program
+anchor deploy
 
-**Use GitHub Codespaces**
+🧰 Useful Commands
+Command	Description
+npm run dev	Start frontend dev server
+npm run build	Build frontend for production
+npm run lint	Lint frontend code
+npm run format	Format frontend code
+anchor build	Build Solana smart contracts
+anchor test	Run Solana program tests
+anchor deploy	Deploy program to Devnet
+anchor clean	Remove build artifacts
+🧠 Example Solana Instruction (Anchor)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+#[derive(Accounts)]
+#[instruction(doc_hash: [u8; 32])]
+pub struct CreateDocument<'info> {
+    #[account(
+        init,
+        payer = user,
+        space = Document::LEN,
+        seeds = [b"document", user.key().as_ref(), doc_hash.as_ref()],
+        bump
+    )]
+    pub document: Account<'info, Document>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
 
-## What technologies are used for this project?
+pub fn create_document(
+    ctx: Context<CreateDocument>,
+    doc_hash: [u8; 32],
+    cid: String,
+) -> Result<()> {
+    let document = &mut ctx.accounts.document;
+    document.owner = ctx.accounts.user.key();
+    document.doc_hash = doc_hash;
+    document.cid = cid;
+    document.timestamp = Clock::get()?.unix_timestamp;
+    Ok(())
+}
 
-This project is built with:
+🔐 Security Principles
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+    ✅ Client-side encryption (no plaintext files on-chain)
 
-## How can I deploy this project?
+    🧩 PDAs for deterministic, program-owned accounts
 
-Simply open [Lovable](https://lovable.dev/projects/fa7f6bd0-1cc0-4713-bb6c-5c59309f9019) and click on Share -> Publish.
+    🔒 On-chain immutability for all metadata
 
-## Can I connect a custom domain to my Lovable project?
+    🔎 Auditability and open verification logic
 
-Yes, you can!
+🚀 Roadmap
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+DAO-based issuer verification
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+DID (did:sol) integration
+
+QR-code verification system
+
+Zero-Knowledge proofs for private credential verification
+
+    Cross-chain credential interoperability
+
+🧾 License
+
+MIT License © 2025 [Your Name / Organization]
+Free for personal and commercial use with attribution.
+🤝 Contributing
+
+We welcome contributions!
+
+    Fork this repo
+
+    Create a new branch (git checkout -b feature/new-feature)
+
+    Commit your changes (git commit -m "Add new feature")
+
+    Push your branch (git push origin feature/new-feature)
+
+    Open a Pull Request 🚀
+
+🌐 Community
+
+    💬 Discord: coming soon
