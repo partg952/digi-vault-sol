@@ -39,12 +39,6 @@ const Landing = () => {
       description:
         "Authenticity checked on Solana blockchain — trust built into every document.",
     },
-    {
-      icon: Shield,
-      title: "Zero-Knowledge Proofs",
-      description:
-        "Prove possession or validity of a document without revealing its contents — privacy-preserving verification.",
-    },
   ];
 
   const steps = [
@@ -77,22 +71,22 @@ const Landing = () => {
         <div className="absolute inset-0 gradient-soft opacity-50" />
         <div className="absolute inset-0 glow-soft" />
 
-        {/* ColorBends as hero background */}
-
+        {/* Prism as hero background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Prism
             animationType="3drotate"
-            timeScale={0.9}
+            timeScale={0.6}
             height={3.5}
             baseWidth={5.5}
             scale={1.6}
             hueShift={0.1}
             colorFrequency={1}
-            noise={0.15}
+            noise={0.35}
             glow={1}
             suspendWhenOffscreen={true}
           />
         </div>
+
         <div className="container mx-auto px-4 h-full relative z-10">
           <div className="w-full md:w-1/2 mx-auto h-full flex justify-center items-center">
             <div className="space-y-8 animate-fade-in-up flex items-center flex-col text-center">
@@ -102,7 +96,6 @@ const Landing = () => {
               {/* <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Own and Verify Your Digital Documents — <span className="text-gradient">Forever</span>
               </h1> */}
-
               <DecryptedText
                 text="Own and Verify Your Digital Documents — Forever"
                 speed={50}
@@ -116,7 +109,17 @@ const Landing = () => {
                 A decentralized document locker built on Solana — tamper-proof,
                 transparent, and user-controlled.
               </p>
-
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-8"
+                  onClick={() => setRoleModalOpen(true)}
+                >
+                  Launch App
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +135,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
               <Card
                 key={index}

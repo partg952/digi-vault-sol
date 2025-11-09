@@ -9,11 +9,13 @@ interface DocumentCardProps {
   timestamp: string;
   status: "active" | "revoked";
   category?: string;
+  url?: string;
+  recipient?: string;
 }
 
-const DocumentCard = ({ name, issuer, timestamp, status, category }: DocumentCardProps) => {
+const DocumentCard = ({ name, issuer, timestamp, status, category, url, recipient }: DocumentCardProps) => {
   return (
-    <Card className="p-6 hover:shadow-lg transition-all border-border hover:border-primary/50">
+    <Card className="p-6 hover:shadow-lg w-min transition-all border-border hover:border-primary/50 h-full flex flex-col justify-between">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
           <div className="p-3 rounded-lg bg-primary/10">
@@ -50,12 +52,26 @@ const DocumentCard = ({ name, issuer, timestamp, status, category }: DocumentCar
         </div>
       </div>
 
-      <div className="flex space-x-2">
-        <Button variant="outline" size="sm" className="flex-1">
-          <Eye className="mr-2 h-4 w-4" />
-          View
-        </Button>
-          
+      {recipient && (
+        <div className="text-xs text-muted-foreground mb-3">Recipient: <span className="font-mono">{recipient}</span></div>
+      )}
+
+      <div className="flex space-x-2 mt-4">
+        {url ? (
+          <a href={url} target="_blank" rel="noreferrer" className="flex-1">
+            <Button variant="outline" size="sm" className="w-full">
+              <Eye className="mr-2 h-4 w-4" />
+              Open
+            </Button>
+          </a>
+        ) : (
+          <Button variant="outline" size="sm" className="flex-1">
+            <Eye className="mr-2 h-4 w-4" />
+            View
+          </Button>
+        )}
+
+        {/* 'More' action removed per request */}
       </div>
     </Card>
   );

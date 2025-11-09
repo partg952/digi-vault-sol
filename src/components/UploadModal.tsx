@@ -30,19 +30,8 @@ const UploadModal = ({ open, onOpenChange }: UploadModalProps) => {
 
   const handleUpload = () => {
     setUploading(true);
-    setProgress(0);
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setUploading(false);
-          setTimeout(() => onOpenChange(false), 500);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+
   };
 
   return (
